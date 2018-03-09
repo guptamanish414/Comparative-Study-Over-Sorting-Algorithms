@@ -1,0 +1,64 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"><title>Pseudocode for quicksort</title>
+<!-- Changed by: Jeremy Hylton, 10-Apr-1996 -->
+
+</head><body><p>Here is pseudo-Python-code for quicksort. It is based on the
+algorithm as it is presented in <i>Introduction to Algorithms</i> by
+Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest,
+Cambridge, Mass.: MIT Press, 1990. (The code may look a lot like real
+				    Python code, but it isn't.)
+
+</p><p>The algorithm is implemented by the Quicksort class. After each
+chunk of code, I list the name of the Quicksort method that implements
+it. The mapping is a little rough, but I think you'll see the
+connection.
+
+</p><pre>def Quicksort(A, p, r):
+    """Sort array A in place.
+
+    Initial call should be Quicksort(A, 0, len(A))
+    """
+    if p &lt; r:
+	q = Partition(A, p, r)
+	Quicksort(A, p, q)
+	Quicksort(A, q+1, r)
+</pre>
+<blockquote>Implemented by Quicksort.done
+</blockquote>
+
+<pre>def Partition(A, p, r):
+<a name="pivot">    x = A[p]                       # the pivot element</a>
+    i = p - 1
+    j = r + 1
+</pre>
+<blockquote>
+Implemented by Quicksort.start
+</blockquote>
+<pre>    while 1:
+	j = j - 1
+	while A[j] &lt;= x:
+	    j = j - 1
+</pre>
+<blockquote>
+Implemented by Quicksort.slide_left
+</blockquote>
+<pre>	i = i + 1
+	while A[i] &gt;= x:
+	    j = j - 1
+</pre>
+<blockquote>
+Implemented by Quicksort.slide_right
+</blockquote>
+<pre><a name="comp">	if i &lt; j:               # elements being compared
+	    swap(A[i], A[j])
+	else:
+	    return j
+</a>
+</pre>
+<blockquote>
+Implemented by Quicksort.exchange_or_done
+</blockquote>
+
+
+
+</body></html>

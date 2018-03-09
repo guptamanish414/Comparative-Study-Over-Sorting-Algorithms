@@ -1,0 +1,22 @@
+1.
+2.
+3.
+4.Bubble
+5.Bucket sort
+6.
+7.Cocktail sort  
+8.Comb sort
+9.Counting sort
+10.
+11.
+12.Heap
+13.Insertion
+14.
+15.Merge
+16.
+17.Quick
+18.Radix
+19.Selection
+20.Shell
+
+21.Digit sort

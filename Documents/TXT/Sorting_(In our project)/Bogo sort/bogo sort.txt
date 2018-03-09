@@ -1,0 +1,35 @@
+In computer science, bogosort[1][2] (also stupid sort[3] or slowsort[4][5]) is a particularly ineffective sorting algorithm based on the generate and test paradigm. It is not useful for sorting, but may be used for educational purposes, to contrast it with other more realistic algorithms; it has also been used as an example in logic programming.[2][4][5] If bogosort were used to sort a deck of cards, it would consist of checking if the deck were in order, and if it were not, throwing the deck into the air, picking the cards up at random, and repeating the process until the deck is sorted. Its name comes from the word bogus.
+Contents
+ [hide] 
+
+    * 1 Description of the algorithm
+    * 2 Running time and termination
+    * 3 Related algorithms
+    * 4 See also
+    * 5 References
+    * 6 External links
+
+[edit] Description of the algorithm
+
+Following is a description of the algorithm in pseudocode.
+
+while not inOrder(deck) do
+    shuffle(deck);
+
+[edit] Running time and termination
+
+This sorting algorithm is probabilistic in nature. If all elements to be sorted are distinct, the expected number of comparisons in the average case is asymptotically equivalent to (e-1) n!, and the expected number of swaps in the average case equals (n-1) n!.[1] The expected number of swaps grows faster than the expected number of comparisons, because if the elements are not in order, this will usually be discovered after only a few comparisons no matter how many elements there are, but the work of shuffling the collection is proportional to its size. In the worst case, the number of comparisons and swaps are both unbounded, for the same reason that a tossed coin might turn up heads any number of times in a row.
+
+The best case occurs if the list as given is already sorted; in this case the expected number of comparisons is n-1, and no swaps at all are carried out.[1]
+
+For any collection of fixed size, the expected running time of the algorithm is finite for much the same reason that the infinite monkey theorem holds: there is some probability of getting the right permutation, so given an unbounded number of tries it will almost surely eventually be chosen. However, if a pseudorandom number generator is used in place of a random source, it may never terminate, since these exhibit long-term cyclic behavior.
+[edit] Related algorithms
+
+Goro sort
+    is a sorting algorithm introduced in the 2011 Google Code Jam.[6] As long as the list is not in order, a subset of all elements is randomly permuted. If this subset is optimally chosen each time this is performed, the expected value of the total number of times this operation needs to be done is equal to the number of misplaced elements.
+
+Bozo sort
+    is another sorting algorithm based on random numbers. If the list is not in order, it picks two items at random and swaps them, then checks to see if the list is sorted. The running time analysis of Bozo Sort is more difficult, but some estimates are found in H. Gruber's analysis of perversely awful randomized sorting algorithms.[1] O(n!) is found to be the expected average case.
+
+Quantum bogosort
+    An in-joke among some computer scientists is that quantum computing could be used to effectively implement a bogosort with a time complexity of O(n). It uses true quantum randomness to randomly permute the list. The list is then inspected, and if it is not in order, the universe is destroyed. By the many-worlds interpretation of quantum physics, the quantum randomization spawns 2^N (where N is the number of random bits) universes and one of these will be such that this single shuffle had produced the list in sorted order. 

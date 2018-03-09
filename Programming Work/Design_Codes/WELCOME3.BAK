@@ -1,0 +1,290 @@
+//Welcome page3
+#include<stdio.h>
+#include<conio.h>
+void main()
+ {
+  int i;
+  clrscr();
+  textcolor(1);
+  cprintf("É");
+  for(i=0;i<78;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("»");
+  for(i=0;i<47;i++)
+   {
+   gotoxy(1,2+i);
+   cprintf("º");
+   }
+  gotoxy(1,49);
+  cprintf("È");
+  for(i=0;i<78;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("¼");
+  for(i=0;i<47;i++)
+   {
+   gotoxy(80,2+i);
+   cprintf("º");
+   }
+  delay(200);
+  textcolor(11);
+ gotoxy(2,3);
+ cprintf("W W");
+ gotoxy(2,4);
+ cprintf("W W");
+ gotoxy(2,5);
+ cprintf("W W");
+ gotoxy(2,6);
+ cprintf("WWW");
+ gotoxy(2,7);
+ cprintf("W W");
+  textcolor(11);
+ gotoxy(6,3);
+ cprintf("EEE");
+ gotoxy(6,4);
+ cprintf("E");
+ gotoxy(6,5);
+ cprintf("EEE");
+ gotoxy(6,6);
+ cprintf("E");
+ gotoxy(6,7);
+ cprintf("EEE");
+  textcolor(11);
+ gotoxy(10,3);
+ cprintf("L");
+ gotoxy(10,4);
+ cprintf("L");
+ gotoxy(10,5);
+ cprintf("L");
+ gotoxy(10,6);
+ cprintf("L");
+ gotoxy(10,7);
+ cprintf("LLL");
+  textcolor(11);
+ gotoxy(14,3);
+ cprintf("CCC");
+ gotoxy(14,4);
+ cprintf("C");
+ gotoxy(14,5);
+ cprintf("C");
+ gotoxy(14,6);
+ cprintf("C");
+ gotoxy(14,7);
+ cprintf("CCC");
+  textcolor(11);
+ gotoxy(18,3);
+ cprintf("OOO");
+ gotoxy(18,4);
+ cprintf("O O");
+ gotoxy(18,5);
+ cprintf("O O");
+ gotoxy(18,6);
+ cprintf("O O");
+ gotoxy(18,7);
+ cprintf("OOO");
+  textcolor(11);
+ gotoxy(22,3);
+ cprintf("M M");
+ gotoxy(22,4);
+ cprintf("MMM");
+ gotoxy(22,5);
+ cprintf("M M");
+ gotoxy(22,6);
+ cprintf("M M");
+ gotoxy(22,7);
+ cprintf("M M");
+  textcolor(11);
+ gotoxy(26,3);
+ cprintf("EEE");
+ gotoxy(26,4);
+ cprintf("E");
+ gotoxy(26,5);
+ cprintf("EEE");
+ gotoxy(26,6);
+ cprintf("E");
+ gotoxy(26,7);
+ cprintf("EEE");
+
+  delay(400);
+  textcolor(11);
+ gotoxy(30,3);
+ cprintf("TTT");
+ gotoxy(30,4);
+ cprintf(" T ");
+ gotoxy(30,5);
+ cprintf(" T ");
+ gotoxy(30,6);
+ cprintf(" T ");
+ gotoxy(30,7);
+ cprintf(" T ");
+  textcolor(11);
+ gotoxy(34,3);
+ cprintf("OOO");
+ gotoxy(34,4);
+ cprintf("O O");
+ gotoxy(34,5);
+ cprintf("O O");
+ gotoxy(34,6);
+ cprintf("O O");
+ gotoxy(34,7);
+ cprintf("OOO");
+
+  delay(400);
+  textcolor(11);
+ gotoxy(39,3);
+ cprintf("OOO");
+ gotoxy(39,4);
+ cprintf("O O");
+ gotoxy(39,5);
+ cprintf("O O");
+ gotoxy(39,6);
+ cprintf("O O");
+ gotoxy(39,7);
+ cprintf("OOO");
+  textcolor(11);
+ gotoxy(43,3);
+ cprintf("U U");
+ gotoxy(43,4);
+ cprintf("U U");
+ gotoxy(43,5);
+ cprintf("U U");
+ gotoxy(43,6);
+ cprintf("U U");
+ gotoxy(43,7);
+ cprintf("UUU");
+  textcolor(11);
+ gotoxy(47,3);
+ cprintf("RRR");
+ gotoxy(47,4);
+ cprintf("R R");
+ gotoxy(47,5);
+ cprintf("RRR");
+ gotoxy(47,6);
+ cprintf("R R");
+ gotoxy(47,7);
+ cprintf("R  R");
+  delay(600);
+  textcolor(11);
+ gotoxy(52,3);
+ cprintf("PPP");
+ gotoxy(52,4);
+ cprintf("P P");
+ gotoxy(52,5);
+ cprintf("PPP");
+ gotoxy(52,6);
+ cprintf("P");
+ gotoxy(52,7);
+ cprintf("P");
+   textcolor(11);
+ gotoxy(56,3);
+ cprintf("RRR");
+ gotoxy(56,4);
+ cprintf("R R");
+ gotoxy(56,5);
+ cprintf("RRR");
+ gotoxy(56,6);
+ cprintf("R R");
+ gotoxy(56,7);
+ cprintf("R  R");
+   textcolor(11);
+ gotoxy(61,3);
+ cprintf("OOO");
+ gotoxy(61,4);
+ cprintf("O O");
+ gotoxy(61,5);
+ cprintf("O O");
+ gotoxy(61,6);
+ cprintf("O O");
+ gotoxy(61,7);
+ cprintf("OOO");
+  textcolor(11);
+ gotoxy(65,3);
+ cprintf("  J");
+ gotoxy(65,4);
+ cprintf("  J");
+ gotoxy(65,5);
+ cprintf("  J");
+ gotoxy(65,6);
+ cprintf("J J");
+ gotoxy(65,7);
+ cprintf("JJJ");
+  textcolor(11);
+ gotoxy(69,3);
+ cprintf("EEE");
+ gotoxy(69,4);
+ cprintf("E");
+ gotoxy(69,5);
+ cprintf("EEE");
+ gotoxy(69,6);
+ cprintf("E");
+ gotoxy(69,7);
+ cprintf("EEE");
+  textcolor(11);
+ gotoxy(73,3);
+ cprintf("CCC");
+ gotoxy(73,4);
+ cprintf("C");
+ gotoxy(73,5);
+ cprintf("C");
+ gotoxy(73,6);
+ cprintf("C");
+ gotoxy(73,7);
+ cprintf("CCC");
+  textcolor(11);
+ gotoxy(77,3);
+ cprintf("TTT");
+ gotoxy(77,4);
+ cprintf(" T ");
+ gotoxy(77,5);
+ cprintf(" T ");
+ gotoxy(77,6);
+ cprintf(" T ");
+ gotoxy(77,7);
+ cprintf(" T ");
+
+ textcolor(9+128);
+ for(i=2;i<80;i++)
+ {
+ gotoxy(i,9);
+ delay(10);
+ cprintf("*");
+ }
+  delay(800);
+  textcolor(11);
+ gotoxy(4,12);
+ cprintf("W W");
+ gotoxy(4,13);
+ cprintf("W W");
+ gotoxy(2,5);
+ cprintf("W W");
+ gotoxy(2,6);
+ cprintf("WWW");
+ gotoxy(2,7);
+ cprintf("W W");
+  textcolor(11);
+ gotoxy(6,3);
+ cprintf("EEE");
+ gotoxy(6,4);
+ cprintf("E");
+ gotoxy(6,5);
+ cprintf("EEE");
+ gotoxy(6,6);
+ cprintf("E");
+ gotoxy(6,7);
+ cprintf("EEE");
+
+ textcolor(9+128);
+ for(i=2;i<80;i++)
+ {
+ gotoxy(i,45);
+ delay(10);
+ cprintf("*");
+ }
+ textcolor(23);
+ gotoxy(51,47);
+ cprintf("PRESS ENTER FOR NEXT PAGE...");
+ getch();
+ }

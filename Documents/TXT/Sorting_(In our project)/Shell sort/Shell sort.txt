@@ -1,0 +1,59 @@
+//Shell Sort C Program
+
+01.#include <stdio.h>
+02. 
+03.void shellsort(int A[],int max)
+04.{
+05.int stop,swap,limit,temp,k;
+06.int x=(int)(max/2)-1;
+07.while(x>0)
+08.{
+09.stop=0;
+10.limit=max-x;
+11.while(stop==0)
+12.{
+13.swap=0;
+14. 
+15.for(k=0; kA[k+x])
+16.{
+17.temp=A[k];
+18.A[k]=A[k+x];
+19.A[k+x]=temp;
+20.swap=k;
+21.}
+22.}
+23.limit=swap-x;
+24.if(swap==0)
+25.stop=1;
+26.}
+27.x=(int)(x/2);
+28.}
+29.}
+30.int main()
+31.{
+32. 
+33.int i,ELEMENTS,X[100];
+34.printf("Enter the number of elements to be sorted:");
+35.scanf("%d",&ELEMENTS);
+36.printf("Enter the elements to be sorted:\n");
+37.for(i = 0; i < ELEMENTS; i++ ){
+38.scanf("%d",&X[i]);
+39.}
+40.printf("Unsorted Array:\n");
+41.for(i=0;i < ELEMENTS;i++)
+42.printf("%d ",X[i]);
+43. 
+44.shellsort(X,ELEMENTS);
+45.printf("\nSORTED ARRAY\n");
+46.for(i=0;i < ELEMENTS;i++)
+47.printf("%d ",X[i]);
+48. 
+49.printf("\n");
+50.}
+
+Output:
+
+Enter the number of elements to be sorted: 5
+Enter the elements to be sorted: 2 6 4 1 2
+Unsorted Array: 2 6 4 1 2
+SORTED ARRAY 2 1 4 2 6

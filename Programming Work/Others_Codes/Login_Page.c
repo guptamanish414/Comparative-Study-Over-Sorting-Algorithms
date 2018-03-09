@@ -1,0 +1,105 @@
+//Login page.
+#include<stdio.h>
+#include<conio.h>
+#include<dos.h>
+void main()
+ {
+  int i,j,k;
+  clrscr();
+  textbackground(3);
+  textcolor(1);
+  cprintf("É");
+  for(i=0;i<78;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("»");
+  for(i=0;i<47;i++)
+   {
+   gotoxy(1,2+i);
+   cprintf("º");
+   }
+  gotoxy(1,49);
+  cprintf("È");
+  for(i=0;i<78;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("¼");
+  for(i=0;i<47;i++)
+   {
+   gotoxy(80,2+i);
+   cprintf("º");
+   }
+ gotoxy(2,4);
+ textcolor(30+128);
+ textbackground(1);
+ cprintf("                       --- WELCOME TO OUR PROJECT ---                         ");
+ textcolor(18);
+ gotoxy(2,7);
+ cprintf("          Analysis the complexcity for different sorting algorithm            ");
+ textcolor(4);
+ textbackground(9);
+ gotoxy(3,11);
+ cprintf("É");
+  for(i=0;i<74;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("»");
+  for(i=10;i<45;i++)
+   {
+   gotoxy(3,2+i);
+   cprintf("º");
+   }
+   gotoxy(3,47);
+   cprintf("È");
+  for(i=0;i<74;i++)
+   {
+   cprintf("Í");
+   }
+  cprintf("¼");
+  for(i=10;i<45;i++)
+   {
+   gotoxy(78,2+i);
+   cprintf("º");
+   }
+ textcolor(20);
+ textbackground(23);
+ gotoxy(25,14);
+ cprintf("PLEASE ENTER PASSWORD:");
+ textbackground(BLACK);
+ textcolor(BLACK);
+ cprintf(" ");
+ cscanf("%d",&j);
+ getch();
+ if(j==1234)
+ {
+ gotoxy(4,16);
+ for(k=0;k<74;k++)
+ {
+ delay(15);
+ textcolor(15);
+ cprintf("²");
+ }
+ textcolor(26);
+ textbackground(1);
+ gotoxy(25,18);
+ cprintf("CORRECT ! PRESS ANY KEY..");
+ }
+ else
+ {
+ gotoxy(4,16);
+ for(k=0;k<74;k++)
+ {
+ delay(15);
+ textcolor(15);
+ cprintf("²");
+ }
+ textcolor(30);
+ textbackground(20);
+ gotoxy(25,18);
+ cprintf("SORRY INVALID PASSWORD");
+ }
+ getch();
+ }

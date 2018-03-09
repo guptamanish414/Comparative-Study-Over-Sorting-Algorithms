@@ -1,0 +1,15 @@
+Jump to: navigation, search
+Library sort Class 	Sorting algorithm
+Data structure 	Array
+Worst case performance 	O(n^2)
+Best case performance 	O(n)
+Average case performance 	O(n\log n)
+Worst case space complexity 	O(n)
+
+Library sort, or gapped insertion sort is a sorting algorithm that uses an insertion sort, but with gaps in the array to accelerate subsequent insertions. The name comes from an analogy:[1]
+
+    Suppose a librarian were to store his books alphabetically on a long shelf, starting with the A's at the left end, and continuing to the right along the shelf with no spaces between the books until the end of the Z's. If the librarian acquired a new book that belongs to the B section, once he finds the correct space in the B section, he will have to move every book over, from the middle of the B's all the way down to the Z's in order to make room for the new book. This is an insertion sort. However, if he were to leave a space after every letter, as long as there was still space after B, he would only have to move a few books to make room for the new one. This is the basic principle of the Library Sort.
+
+The algorithm was proposed by Michael A. Bender, Martín Farach-Colton, and Miguel Mosteiro in 2006.[2]
+
+Like the insertion sort it is based on, library sort is a stable comparison sort and can be run as an online algorithm; however, it was shown to have a high probability of running in O(n log n) time (comparable to quicksort), rather than an insertion sort's O(n2). Its implementation is very similar to a skip list. The drawback to using the library sort is that it requires extra space[specify] for the gaps.

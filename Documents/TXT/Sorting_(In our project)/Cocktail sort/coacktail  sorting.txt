@@ -1,0 +1,76 @@
+Jump to: navigation, search
+Cocktail sort Visualisation of shaker sort
+Class 	Sorting algorithm
+Data structure 	Array
+Worst case performance 	?(n²)
+Best case performance 	O(n)
+Average case performance 	?(n²)
+
+Cocktail sort, also known as bidirectional bubble sort, cocktail shaker sort, shaker sort (which can also refer to a variant of selection sort), ripple sort, shuffle sort,[1] shuttle sort or happy hour sort, is a variation of bubble sort that is both a stable sorting algorithm and a comparison sort. The algorithm differs from a bubble sort in that it sorts in both directions on each pass through the list. This sorting algorithm is only marginally more difficult to implement than a bubble sort, and solves the problem of turtles in bubble sorts.
+Contents
+ [hide] 
+
+    * 1 Pseudocode
+    * 2 Differences from bubble sort
+    * 3 Complexity
+    * 4 Notes
+    * 5 References
+    * 6 External links
+
+[edit] Pseudocode
+
+The simplest form of cocktail sort goes through the whole list each time:
+
+procedure cocktailSort( A : list of sortable items ) defined as:
+  do
+    swapped := false
+    for each i in 0 to length( A ) - 2 do:
+      if A[ i ] > A[ i + 1 ] then // test whether the two elements are in the wrong order
+        swap( A[ i ], A[ i + 1 ] ) // let the two elements change places
+        swapped := true
+      end if
+    end for
+    if swapped = false then
+      // we can exit the outer loop here if no swaps occurred.
+      break do-while loop
+    end if
+    swapped := false
+    for each i in length( A ) - 2 to 0 do:
+      if A[ i ] > A[ i + 1 ] then
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      end if
+    end for
+  while swapped // if no elements have been swapped, then the list is sorted
+end procedure
+
+The first rightward pass will shift the largest element to its correct place at the end, and the following leftward pass will shift the smallest element to its correct place at the beginning. The second complete pass will shift the second largest and second smallest elements to their correct places, and so on. After i passes, the first i and the last i elements in the list are in their correct positions, and do not need to be checked. By shortening the part of the list that is sorted each time, the number of operations can be halved (see bubble sort).
+
+procedure cocktailSort( A : list of sortable items ) defined as:
+  // `begin` and `end` marks the first and last index to check
+  begin := -1
+  end := length( A ) - 2
+  do
+    swapped := false
+    // increases `begin` because the elements before `begin` are in correct order
+    begin := begin + 1
+    for each i in begin to end do:
+      if A[ i ] > A[ i + 1 ] then
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      end if
+    end for
+    if swapped = false then
+      break do-while loop
+    end if
+    swapped := false
+    // decreases `end` because the elements after `end` are in correct order
+    end := end - 1
+    for each i in end to begin do:
+      if A[ i ] > A[ i + 1 ] then
+        swap( A[ i ], A[ i + 1 ] )
+        swapped := true
+      end if
+    end for
+  while swapped
+end procedure

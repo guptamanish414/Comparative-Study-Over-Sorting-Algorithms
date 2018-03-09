@@ -1,0 +1,42 @@
+
+body{font-family:arial,sans-serif; margin: 0px 0px 0px 0px; }
+td,a,p,.h{font-family:arial,sans-serif; } 
+.h{font-size: 20px;} .h{color:#ddaa11} 
+.q{text-decoration:none; color:#0000cc;} 
+.s{font-size: 1px;} 
+.sl{text-decoration:none; color:#0000cc; font-size: 11px;}
+.sl:hover{text-decoration:none; color: red; font-size: 11px;}
+.wsl{font-family:arial,sans-serif;text-decoration:none; color:#ffffff; font-size: 12px;}
+.gh{font-family:arial,sans-serif; color:#ff0000; font-size: 12px;}
+.reg{font-size: 12px;table-layout: fixed;}
+.reg13{font-size: 13px;}
+.reg14{font-size: 14px;}
+.vsl{text-decoration:none; color:#0000cc; font-size: 9px;}
+.bl{text-decoration:none; color:#0000cc; font-size: 12px;}
+.p2{font-size: 2px;}
+.nodec{text-decoration:none;}
+.vsl12{text-decoration:none; color:#0000cc; font-size: 12px;}
+.wsl14{text-decoration:none; color:#ffffff; font-size: 14px;}
+.def{text-decoration:none; color:black; font-size: 11px;}
+.sl12{text-decoration:none; color:#0000cc; font-size: 12px;}
+.sl12:hover{text-decoration:none; color: red; font-size: 12px;}
+.sl13{text-decoration:none; color:#0000cc; font-size: 13px;}
+.sl13:hover{text-decoration:none; color: red; font-size: 13px;}
+.sl14{text-decoration:none; color:#0000cc; font-size: 14px;}
+.sl14:hover{text-decoration:none; color: red; font-size: 14px;}
+.sl15{text-decoration:none; color:#0000cc; font-size: 15px;}
+.sl15:hover{text-decoration:none; color: red; font-size: 15px;}
+.tablm10{padding-left: 10px;}
+.tabsnip{border-left:solid #4d99e5 1px;border-right:solid #4d99e5 1px;border-bottom:solid #4d99e5 1px;border-top:solid #4d99e5 1px;}
+.tabsnip13{border-left:solid #4d99e5 1px;border-right:solid #4d99e5 1px;border-bottom:solid #4d99e5 1px;border-top:solid #4d99e5 1px;text-decoration:none; color:black; font-size: 13px;}
+.def12{text-decoration:none; color:black; font-size: 12px;}
+.def13{text-decoration:none; color:black; font-size: 13px;table-layout: fixed;}
+.def14{text-decoration:none; color:black; font-size: 14px;}
+.def15{text-decoration:none; color:black; font-size: 15px;}
+
+.stprod{font-family:arial,helvetica,sans-serif;font-size:11px;color:#0000cc;text-decoration:underline;}
+.stauth{font-family:arial,helvetica,sans-serif;font-size:11px;}
+.st12{font-family:arial,helvetica,sans-serif;font-size:12px;}
+
+.foothr{ color:#ffcc33; }
+

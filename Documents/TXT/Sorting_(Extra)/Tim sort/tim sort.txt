@@ -1,0 +1,91 @@
+This article may require copy editing for grammar, style, cohesion, tone, or spelling. You can assist by editing it. (November 2011)
+Timsort Timsort-edited.png
+A visual representation of timsort.
+Class 	Sorting algorithm
+Data structure 	Array
+Worst case performance 	O(n\log n)[1]
+Best case performance 	O(n)
+Average case performance 	O(n\log n)
+Worst case space complexity 	O(n)
+
+Timsort is a hybrid sorting algorithm, derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data. It was invented by Tim Peters in 2002 for use in the Python programming language. The algorithm finds subsets of the data that are already ordered, and uses the subsets to sort the data more efficiently. This is done by merging an identified subset, called a run, with existing runs until certain criteria are fulfilled. Timsort has been Python's standard sorting algorithm since version 2.3. It is now also used to sort arrays in Java SE 7,[2] and on the Android platform.[3]
+Contents
+ [hide] 
+
+    * 1 Operation
+          o 1.1 Minrun
+          o 1.2 Insertion Sort
+          o 1.3 Merge Memory
+          o 1.4 Merging Procedure
+          o 1.5 Galloping Mode
+    * 2 Performance
+    * 3 References
+    * 4 External links
+
+[edit] Operation
+
+Timsort was designed to take advantage of partial orderings that already exist in most real-world data. Timsort operates by finding runs, subsets of at least two elements, in the data. Runs can be either non-descending (each element is equal to or greater than its predecessor) or strictly descending (each element is lower than its predecessor). If it is descending, it must be strictly descending, since descending runs are later reversed by a simple swap of elements from both ends converging in the middle. This method is stable if the elements are present in a strictly descending order. After obtaining such a run in the given array, timsort processes it, and then continues its search for the next run.
+[edit] Minrun
+Timsort algorithm searches for such ordered sequences, minruns, to perform its sort
+
+A natural run is a sub-array that is already ordered. Natural runs in real-time data may be of varied lengths. Timsort chooses a sorting technique depending on the length of the run. For example, if the run length is smaller than a certain value, insertion sort is used. Thus it is termed as an adaptive sort.[4]
+
+The size of the run is checked against the minimum run size. The minimum run size (minrun) depends on the size of the array. For an array of fewer than 64 elements, the minrun is the size of the array, making Timsort essentially an insertion sort. For larger arrays, a number, referred to as minrun, is chosen from the range 32 to 65, such that the size of the array, divided by the minimum run size, is equal to, or slightly smaller than, a power of two. The final algorithm for this simply takes the six most significant bits of the size of the array, adds one if any of the remaining bits are set, and uses that result as the minrun. This algorithm works for all cases, including the one in which the size of the array is smaller than 64.[4]
+[edit] Insertion Sort
+
+When an array is random, a natural run will most likely contain less than minrun elements. In this case, an appropriate number of succeeding elements are selected, and insertion sort is used to increase the size of the run to minrun size. Thus, most runs in a random array are, or become, minrun in length. This results in balanced merges, which provides an efficient way to proceed. It also results in a reasonable number of function calls in the implementation of the sort.[5]
+[edit] Merge Memory
+The minruns are inserted in a stack. If X < Y + Z then X and Y are merged and then inserted into a stack. In this way, merging is continued until all arrays satisfy a) X > Y + Z and b) Y > Z
+
+Once run lengths are optimized, the runs are merged. The principle of Timsort implies that it will be merged by a specific technique that will ensure the highest efficiency. When a run is found, the algorithm pushes its base address and length on a stack. A function is then called which determines whether the run should be merged with previous runs. Timsort does not merge non-consecutive runs because doing this would cause the element common to all three runs to become out of order with respect to the middle run.
+
+Thus, merging is always done on two consecutive runs. For this, the three top-most runs in the stack which are unsorted are considered. If, say, X, Y, Z represent the lengths of the three uppermost runs in the stack, the algorithm merges the runs so that ultimately the following two rules are satisfied:
+
+   1. X > Y + Z
+   2. Y > Z[4]
+
+For example, if the first of the two rules is not satisfied by the current run status, that is, if X < Y + Z, then, Y is merged with the smaller of X and Z. The merging continues until both the rules are satisfied. Then the algorithm goes on to determine the next run.[5]
+
+The rules above aim at maintaining run lengths as close to each other as possible to ensure balanced merges, which are more efficient. At the same time only a small number of runs may be remembered, as the stack is of a specific size. The algorithm also tries to exploit the fresh occurrence of the runs to be merged, in cache memory. Thus a compromise is attained between delaying merging, and exploiting fresh occurrence in cache memory.
+[edit] Merging Procedure
+Algorithm creates a temporary memory equal to size of smaller array. Then, it shifts elements in (say if X is smaller) X to the temporary memory and then sorts and fills elements in final order into combined space of X and Y
+
+Merging two adjacent runs is done with the help of temporary memory. The temporary memory is of the size of the minimum of the two runs. The algorithm copies the smaller of the two runs into this temporary memory and then uses the original memory (of the smaller run) and the memory of the other run to store the final run after sorting.
+
+A simple merge algorithm is then run left to right or right to left depending on which run is smaller, on the temporary memory and original memory of the larger run, the final sorted run being stored in the original memory of the two initial runs. In order to make this more efficient, Timsort searches for appropriate positions for starting element of one array in the other using an adaption of binary search. Say, for example, two runs A and B are to be merged, with A as the smaller run. In that case a binary search is conducted in order to find at what position in A the first element of B will fit. Note that in this situation A and B are already sorted individually. Therefore, when such an appropriate position is found, the algorithm can ignore elements before that position in A while inserting (after comparing) elements of B. Similarly, the algorithm also looks for what position the last element of A can take in B. The elements in B after this position can also be ignored for the sorting. This preliminary searching may not prove efficient in the case of random data, however it is found to be highly efficient in other situations and is hence included.
+[edit] Galloping Mode
+Elements (pointed to by blue arrow) are compared and the smaller element is moved to its final position (pointed to by red arrow).
+
+Generally the merge occurs in what is called the ‘one pair at a time’ mode, where respective elements of both runs are compared. In the case where function merge_lo is invoked, that is, when the algorithm merges left-to-right, the smaller of the two is brought to a merge area. A count of the number of times the final element appears from a given run is recorded. When this value reaches a certain value, MIN_GALLOP, the merge switches to what is called the ‘galloping mode’. In this mode we use the a previously mentioned adaptation of binary search to identify where the first element of the smaller array must be placed in the larger array and vice-verse . Thus the entire set of elements, in one array, occurring before this location can be moved all together to the merge area and the other way round. This is possible as we have both the runs to be merged, as ordered individually. The galloping mode is entered only when it is the most optimum method to merge; this is decided by the value of min-gallop. Min-gallop is a variable initialized to MIN_GALLOP. However the functions merge-lo and merge-hi increment the value of the variable, if galloping is not efficient, and decrement it if it is. The moment too many consecutive elements come from different runs, galloping mode is exited.[4]
+
+When in galloping mode, the algorithm searches for the first element of one array in the other. This is done by comparing that first element (initial element) with the zeroth element of the other array, then the first, the third and so on, that is (2k - 1)th element, so as to get a range of elements between which the initial element will lie. This provides a shorter range to conduct binary search on, thus increasing efficiency. Galloping proves to be more efficient except in cases with especially long runs and random data usually has shorter runs. Also, in cases where galloping is found to be less efficient as compared to binary search, galloping mode is exited from.
+All red elements are smaller than blue (here, 21). Thus they can be moved in a chunk to the final array.
+
+However it is found that galloping is not always efficient. One reason is due to excessive function calls. Function calls are expensive and thus when they are large in number, they hamper program efficiency. Further there are cases where galloping mode requires more number of comparisons than a simple linear search (one at a time search). While for the first few cases both modes may require the same number of comparisons, over time galloping mode requires 33% more comparisons than linear search to arrive at the same results. Moreover all comparisons in galloping mode are done by function calls.
+
+Also, it is seen that galloping is beneficial only when the initial element is not one of the first seven elements of the other run. This also results in MIN_GALLOP being set to 7. To avoid the drawbacks of galloping mode, the merging functions adjust the value of min-gallop. If the element is from the array currently under consideration (that is, the array which has been returning the elements consecutively for a while), the value of min-gallop is reduced by one. Otherwise, the value is incremented by one, thus discouraging entry back to galloping mode. When this is done, in the case of random data, the value of min-gallop becomes so large, that the entry back to galloping mode never takes place.
+
+In the case where merge-hi is used (that is, merging is done right-to-left), galloping needs to start from the right end of the data, that is the last element. Galloping from the beginning also gives the required results, but makes more comparisons than required. Thus, the algorithm for galloping includes the use of a variable which gives the index at which galloping should begin. Thus the algorithm can enter galloping mode at any index and continue thereon as mentioned above, as in, it will check at the next index which is offset by 1, 3, 7,...., (2k - 1).. and so on from the current index. In the case of merge-hi, the offsets to the index will be -1, -3, -7,....[4]
+[edit] Performance
+
+According to information theory, no comparison sort can perform better than \Theta(n \log n) comparisons in the average case. On real-world data, Timsort often requires far fewer than \Theta(n \log n) comparisons, because it takes advantage of the fact that sublists of the data may already be in order.[6] In case of random data, there are no partially ordered subarrays to take advantage of. In this case, timsort approaches the theoretical limit of \log(n!), which is in \Theta(n \log n).[4]
+
+The following table compares the time complexity of timsort with other comparison sorts.
+	Timsort 	Merge sort 	Quicksort 	Insertion sort 	Selection sort 	Smoothsort
+Best Case 	\Omega(n) 	\Omega(n \log n) 	\Omega(n \log n) 	\Omega(n) 	\Omega(n^2) 	\Omega(n)
+Average Case 	\Theta(n \log n) 	\Theta(n \log n) 	\Theta(n \log n) 	\Theta(n^2) 	\Theta(n^2) 	\Theta(n \log n)
+Worst Case 	O(n \log n) 	O(n \log n) 	O(n^2) 	O(n^2) 	O(n^2) 	O(n \log n)
+
+The following table provides a comparison of the space complexities of the various sorting techniques. Note that for merge sort, the worst case space complexity is usually O(n).
+	Timsort 	Merge sort 	Quicksort 	Insertion sort 	Selection sort 	Smoothsort
+Space Complexity 	n 	n 	\log n 	1 	1 	1
+
+Please note that the space complexity of both Timsort and merge sort can be reduced to \log n at the cost of speed (see in-place merge sort).
+[edit] References
+
+   1. ^ Peters, Tim. "[Python-Dev] Sorting". Python Developers Mailinglist. http://mail.python.org/pipermail/python-dev/2002-July/026837.html. Retrieved 24 Feb 2011. "[Timsort] also has good aspects: It's stable (items that compare equal retain their relative order, so, e.g., if you sort first on zip code, and a second time on name, people with the same name still appear in order of increasing zip code; this is important in apps that, e.g., refine the results of queries based on user input). ... It has no bad cases (O(N log N) is worst case; N-1 compares is best)." 
+   2. ^ jjb. "Commit 6804124: Replace "modified mergesort" in java.util.Arrays.sort with timsort". Java Development Kit 7 Hg repo. http://hg.openjdk.java.net/jdk7/tl/jdk/rev/bfd7abda8f79. Retrieved 24 Feb 2011. 
+   3. ^ "Class: java.util.TimSort<T>". Android JDK 1.5 Documentation. http://www.kiwidoc.com/java/l/x/android/android/5/p/java.util/c/TimSort. Retrieved 24 Feb 2011. 
+   4. ^ a b c d e f timsort, python. "python_timsort". http://svn.python.org/projects/python/trunk/Objects/listsort.txt. 
+   5. ^ a b timsort, understanding. "understanding timsort". http://www.drmaciver.com/2010/01/understanding-timsort-1adaptive-mergesort/. 
+   6. ^ Martelli, Alex (2006). Python in a Nutshell (In a Nutshell (O'Reilly)). O'Reilly Media, Inc.. p. 57. ISBN 0596100469.

@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+char ch;
+clrscr();
+printf("\nEnter your grade:");
+scanf("%c",&ch);
+switch (ch)
+{
+case 'o':
+case 'O':
+printf("\nYour marks in between 100 to 81");
+break;
+case 'a':
+case 'A':
+printf("\nYour marks in between 80 to 61");
+break;
+case 'b':
+case 'B':
+printf("\nYour marks in between 60 to 41");
+break;
+case 'f':
+case 'F':
+printf("\nSorry....failed....");
+break;
+}
+getch();
+}

@@ -1,0 +1,22 @@
+SelectionSort(A)
+// GOAL: place the elements of A in ascending order
+1  n := length[A]
+2  for i := 1 to n
+3     // GOAL: place the correct number in A[i]
+4     j := FindIndexOfSmallest( A, i, n )
+5     swap A[i] with A[j]
+      // L.I. A[1..i] the i smallest numbers sorted
+6  end-for
+7  end-procedure
+
+
+FindIndexOfSmallest( A, i, n )
+// GOAL: return j in the range [i,n] such 
+//       that A[j]<=A[k] for all k in range [i,n]
+1  smallestAt := i ;
+2  for j := (i+1) to n
+3     if ( A[j] < A[smallestAt] ) smallestAt := j
+      // L.I. A[smallestAt] smallest among A[i..j]
+4  end-for
+5  return smallestAt
+6  end-procedure

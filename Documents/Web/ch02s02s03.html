@@ -1,0 +1,647 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   
+      <title>2.2.3.&nbsp;Time complexity, space complexity, and the O-notation</title>
+      <link rel="stylesheet" href="ch02s02s03_files/tutorialstyle.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.62.4">
+      <meta name="keywords" content="LEDA, LEDA-Tutorial, LEDA Tutorial, Joachim Ziegler">
+      <link rel="home" href="http://www.leda-tutorial.org/en/official/index.html" title="The LEDA Tutorial">
+      <link rel="up" href="http://www.leda-tutorial.org/en/official/ch02s02.html" title="2.2.&nbsp;Arrays">
+      <link rel="previous" href="http://www.leda-tutorial.org/en/official/ch02s02s02.html" title="2.2.2.&nbsp;Two-dimensional arrays (class array2)">
+      <link rel="next" href="http://www.leda-tutorial.org/en/official/ch02s03.html" title="2.3.&nbsp;Linear lists (class list)">
+   </head>
+   <body alink="#0000FF" bgcolor="white" link="#0000FF" text="black" vlink="#840084">
+      <div class="navheader">
+         <table summary="Navigation header" width="100%">
+            <tbody><tr>
+               <th colspan="3" align="center">2.2.3.&nbsp;Time complexity, space complexity, and the O-notation</th>
+            </tr>
+            <tr>
+               <td align="left" width="20%"><a accesskey="p" href="http://www.leda-tutorial.org/en/official/ch02s02s02.html"><img src="ch02s02s03_files/prev.gif" alt="Prev"></a>&nbsp;
+               </td>
+               <th align="center" width="60%">2.2.&nbsp;Arrays</th>
+               <td align="right" width="20%">&nbsp;<a accesskey="n" href="http://www.leda-tutorial.org/en/official/ch02s03.html"><img src="ch02s02s03_files/next.gif" alt="Next"></a></td>
+            </tr>
+         </tbody></table>
+         <hr>
+      </div>
+      <div class="sect2" lang="en">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h3 class="title"><a name="sec.TimeComplexity"></a>2.2.3.&nbsp;Time complexity, space complexity, and the O-notation
+                  </h3>
+               </div>
+            </div>
+            <div></div>
+         </div>
+         <div class="highlights">
+            <p><span class="emphasis"><em>Learning objectives</em></span></p>
+            <table class="simplelist" summary="Simple list" border="0">
+               <tbody><tr>
+                  <td>Landau's symbols <span class="symbol">O</span> and <span class="symbol">&#920;</span></td>
+               </tr>
+               <tr>
+                  <td>Making predictions on the running time and space consumption of a program</td>
+               </tr>
+               <tr>
+                  <td>Amortized analysis</td>
+               </tr>
+            </tbody></table>
+         </div>
+         <p>In <a href="http://www.leda-tutorial.org/en/official/ch02s02s01.html" title="2.2.1.&nbsp;One-dimensional arrays (class array)">Section 2.2.1</a> we
+                    implemented a simple sorting algorithm, <a href="http://www.leda-tutorial.org/en/official/ch02s02s01.html#def.SortingByMinimumSearch"><i class="glossterm">sorting by minimum
+                          search</i></a>. We used it there to sort characters; we
+                    also could sort numbers or strings with it because it is only
+                    based on comparisons and swapping. All we have to do to sort
+                    strings with the same algorithm is to replace the type name
+                    <tt class="type">array&lt;char&gt;</tt> in the source code by
+                    <tt class="type">array&lt;string&gt;</tt><span class="abbrev">...</span> and we can sort a
+                    complete phone book: the phone book of Saarbrücken, of Munich,
+                    of Germany. Can we really?
+            
+            
+            <a class="indexterm" name="d0e3908"></a>
+            
+         </p>
+         <div class="sect3" lang="en">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h4 class="title"><a name="d0e3914"></a>Time complexity
+                     </h4>
+                  </div>
+               </div>
+               <div></div>
+            </div>
+            <p>How long does this sorting program run? It possibly takes
+                     a very long time on large inputs (that is many strings) until the
+                     program has completed its work and gives a sign of life
+                     again. Sometimes it makes sense to be able to estimate the
+                     running time <span class="emphasis"><em>before</em></span> starting a program.
+                     Nobody wants to wait for a sorted phone book for years!
+                     Obviously, the running time depends on the number n of the
+                     strings to be sorted. Can we find a formula for the running time
+                     which depends on n?
+            </p>
+            <p>Having a close look at the program we notice that it consists of
+               two nested for-loops. In both loops the variables run from 0 to n, but
+               the inner variable starts right from where the outer one just
+               stands. An <tt class="literal">if</tt> with a comparison and some
+               assignments not necessarily executed reside inside the two
+               loops. A good measure for the running time is the number of
+               executed comparisons.<sup>[<a name="d0e3927" href="#ftn.d0e3927">11</a>]</sup>
+               
+               
+               
+               
+               
+               In the first iteration n comparisons take place, in the second n-1,
+               then n-2, then n-3 <span class="abbrev">etc.</span> So 1+2+<span class="abbrev">...</span>+n comparisons are performed
+               altogether. According to the well known Gaussian sum formula these are
+               exactly 1/2·(n-1)·n comparisons.  <a href="http://www.leda-tutorial.org/en/official/ch02s02s03.html#fig.SortingByMinimumSearchAnalysis" title="Figure&nbsp;2.8.&nbsp;Running time analysis of sorting by minimum search">Figure 2.8</a> illustrates this. The
+               screened area corresponds to the number of comparisons executed. It
+               apparently corresponds <span class="abbrev">approx.</span> to half of the area of a square with a
+               side length of n. So it amounts to <span class="abbrev">approx.</span>
+               1/2·n<sup>2</sup>.
+               
+            </p>
+            <div class="figure"><a name="fig.SortingByMinimumSearchAnalysis"></a><p class="title"><b>Figure&nbsp;2.8.&nbsp;Running time analysis of sorting by minimum search</b></p>
+               <div class="mediaobject" align="center"><img src="ch02s02s03_files/SortingByMinimumSearchAnalysis.png" alt="Running time analysis of sorting by minimum search" align="middle"><div class="caption">
+                     <p></p>
+                  </div>
+               </div>
+            </div>
+            <p>How does this expression have to be judged? Is this good
+                     or bad?  If we double the number of strings to be sorted, the
+                     computing time quadruples!  If we increase it ten-fold, it takes
+                     even 100 = 10<sup>2</sup> times longer until the
+                     program will have terminated! All this is caused by the
+                     expression n<sup>2</sup>. One says: Sorting by
+                     minimum search has <i class="firstterm"><a name="def.QuadraticComplexity"></a>quadratic
+                        complexity</i>. This gives us a forefeeling that this
+                     method is unsuitable for large amounts of data because it simply
+                     takes far too much time.
+               
+               <a class="indexterm" name="d0e3969"></a>
+               
+               
+            </p>
+            <p>So it would be a fallacy here to say: &#8220;<span class="quote">For a lot of
+                        money, we'll simply buy a machine which is twice as fast, then we
+                        can sort twice as many strings (in the same
+                        time).</span>&#8221; Theoretical running time considerations offer
+                     protection against such fallacies.
+            </p>
+            <p>The number of (machine) instructions which a program
+                     executes during its running time is called its <i class="firstterm"><a name="def.TimeComplexity"></a>time complexity</i> in computer
+                     science.  This number depends primarily on the size of the
+                     program's input, that is approximately on the number of the strings
+                     to be sorted (and their length) and the algorithm used. So
+                     approximately, the time complexity of the program &#8220;<span class="quote">sort an
+                        array of n strings by minimum search</span>&#8221; is described by the
+                     expression <span class="math">c·n<sup>2</sup></span>.
+               
+            </p>
+            <p>c is a constant which depends on the programming language
+                     used, on the quality of the compiler or interpreter, on the CPU,
+                     on the size of the main memory and the access time to it, on the
+                     knowledge of the programmer, and last but not least on the
+                     algorithm itself, which may require simple but also time
+                     consuming machine instructions.  (For the sake of simplicity we
+                     have drawn the factor 1/2 into c here.)
+               
+               
+               
+               
+               So while one can make c smaller by improvement of external
+               circumstances (and thereby often investing a lot of money), the
+               term n<sup>2</sup>, however, always remains unchanged.
+               
+               
+               
+               
+               
+               <a class="indexterm" name="d0e3998"></a>
+               <a class="indexterm" name="d0e4002"></a>
+               
+               
+            </p>
+         </div>
+         <div class="sect3" lang="en">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h4 class="title"><a name="d0e4008"></a>The O-notation
+                     </h4>
+                  </div>
+               </div>
+               <div></div>
+            </div>
+            <p>In other words: c is not really important for the
+                      description of the running time! To take this circumstance into
+                      account, running time complexities are always specified in the
+                      so-called <i class="firstterm"><a name="def.ONotation"></a>O-notation</i>
+                      in computer science. One says: The sorting method has running
+                      time <i class="firstterm"><a name="def.Onsquare"></a>O(n<sup>2</sup>)</i>. The
+                      expression O is also called <i class="firstterm"><a name="def.LandausSymbol"></a>Landau's symbol</i>.
+               
+               
+               
+               <a class="indexterm" name="d0e4025"></a>
+               <a class="indexterm" name="d0e4029"></a>
+               <a class="indexterm" name="d0e4033"></a>
+               
+               
+            </p>
+            <p>Mathematically speaking, O(n<sup>2</sup>)
+                       stands for a set of functions, exactly for all
+                       those functions which, &#8220;<span class="quote">in the long run</span>&#8221;, do not
+                       grow faster than the function n<sup>2</sup>,
+                       that is for those functions for which the function
+                       n<sup>2</sup> is an upper bound (apart from a
+                       constant factor.) To be precise, the following holds true: A
+                       function f is an element of the set
+                       O(n<sup>2</sup>) if there are a factor c and an integer number
+                       n<sub>0</sub> such that for all n equal to or
+                       greater than this n<sub>0</sub> the following
+                       holds:
+               
+               
+            </p>
+            <div class="informalequation">
+               <div class="mediaobject">
+                  <p>f(n) &#8804; c·n<sup>2</sup>.
+                  </p>
+               </div>
+            </div>
+            <p>
+               
+               The function n<sup>2</sup> is then called an
+               <i class="firstterm"><a name="def.AsymptoticUpperBound"></a>asymptotically upper
+                  bound</i> for f.  Generally, the notation <i class="firstterm"><a name="def.fneOgn"></a>f(n)=O(g(n))</i> says that the function f is
+               asymptotically bounded from above by the function
+               g.<sup>[<a name="d0e4081" href="#ftn.d0e4081">12</a>]</sup>
+               
+               
+                       <a class="indexterm" name="d0e4085"></a>
+                       <a class="indexterm" name="d0e4089"></a>
+               <a class="indexterm" name="d0e4095"></a>
+               <a class="indexterm" name="d0e4099"></a>
+               
+               
+               
+            </p>
+            <p>A function f from O(n<sup>2</sup>) may
+                       grow considerably more slowly than
+                       n<sup>2</sup> so that, 
+                       mathematically speaking, the quotient f / n<sup>2</sup>
+                       converges to 0 with growing n. An example of this is the
+                       function f(n)=n. However, this does not hold for the function
+                       f which describes the running time of our sorting method. This
+                       method <span class="emphasis"><em>always</em></span> requires
+                       n<sup>2</sup> comparisons (apart from a
+                       constant factor of 1/2). n<sup>2</sup> is
+                       therefore also an <i class="firstterm"><a name="def.AsymptoticLowerBound"></a>asymptotically lower
+                          bound</i> for f. This f behaves in the long run
+                       <span class="emphasis"><em>exactly</em></span> like
+                       n<sup>2</sup>. Expressed mathematically: There
+                       are factors c<sub>1</sub> and
+                       c<sub>2</sub> and an integer number
+                       n<sub>0</sub> such that for all n equal to or
+                       larger than n<sub>0</sub> the following holds:
+               
+               
+               
+            </p>
+            <div class="informalequation">
+               <div class="mediaobject">
+                  <p>c<sub>1</sub>·n<sup>2</sup> &#8804; f(n)
+                                   &#8804; c<sub>2</sub>·n<sup>2</sup>.
+                     
+                  </p>
+               </div>
+            </div>
+            <p>
+               
+               
+               So f is bounded by n<sup>2</sup> from above 
+               <span class="emphasis"><em>and</em></span> from below. There also is a notation of its
+               own for the set of these functions: <i class="firstterm"><a name="def.Theta"></a>&#920;(n<sup>2</sup>)</i>.
+               
+               
+            </p>
+            <p><a href="http://www.leda-tutorial.org/en/official/ch02s02s03.html#fig.AsymptoticNotation" title="Figure&nbsp;2.9.&nbsp;The asymptotical bounds  O and &#920;">Figure 2.9</a> contrasts a
+                     function f which is bounded from above by O(g(n)) to a function
+                     whose asymptotic behavior is described by &#920;(g(n)): The
+                     latter one lies in a tube around g(n), which results from the two
+                     factors c<sub>1</sub> and c<sub>2</sub>.
+                     
+            </p><a class="indexterm" name="d0e4184"></a><a class="indexterm" name="d0e4189"></a><a class="indexterm" name="d0e4194"></a><div class="figure"><a name="fig.AsymptoticNotation"></a><p class="title"><b>Figure&nbsp;2.9.&nbsp;The asymptotical bounds  O and &#920;</b></p>
+               <div class="mediaobject" align="center"><img src="ch02s02s03_files/AsymptoticNotation.png" alt="The asymptotical bounds O and &#920;" align="middle"><div class="caption">
+                     <p></p>
+                  </div>
+               </div>
+            </div>
+            <p>These notations appear again and again in the LEDA
+                       manual at the description of non-trivial operations. Thereby
+                       we can estimate the <i class="firstterm"><a name="def.Order"></a>order of
+                          magnitude</i> of the method used; in general, however,
+                       we cannot make an exact running time prediction.  (Because in
+                       general we do not know c, which depends on too many factors,
+                       even if it can often be determined experimentally; see also
+                       <a href="http://www.leda-tutorial.org/en/official/ch02s02s03.html#exe.DeterminingTheConstant">Exercise&nbsp;8</a> on this.)
+               
+               
+               
+               
+               
+               
+               
+               <a class="indexterm" name="d0e4214"></a>
+               
+               
+            </p>
+            <p>Frequently the statement is found in the manual that
+                         an operation takes &#8220;<span class="quote"><i class="firstterm"><a name="def.ConstantTime"></a>constant time</i></span>&#8221;.  By
+                         this it is meant that this operation is executed with a
+                         constant number of machine instructions, independently from the
+                         size of the input. The function describing the running time
+                         behavior is therefore in <i class="firstterm"><a name="def.O1"></a>O(1)</i>.
+               
+               
+               The expressions &#8220;<span class="quote"><i class="firstterm"><a name="def.LinearTime"></a>linear
+                     time</i></span>&#8221; and &#8220;<span class="quote"><i class="firstterm"><a name="def.LogarithmicTime"></a>logarithmic time</i></span>&#8221; describe
+               corresponding running time behaviors: By means of the O-notation this is
+               often expressed as &#8220;<span class="quote">takes time <i class="firstterm"><a name="def.On"></a>O(n)</i> and <i class="firstterm"><a name="def.Ologn"></a>O(log(n))</i></span>&#8221;, respectively.
+               
+               
+               <a class="indexterm" name="d0e4245"></a>
+               <a class="indexterm" name="d0e4251"></a>
+               <a class="indexterm" name="d0e4257"></a>
+               <a class="indexterm" name="d0e4263"></a>
+               <a class="indexterm" name="d0e4269"></a>
+               <a class="indexterm" name="d0e4275"></a>
+               <a class="indexterm" name="d0e4279"></a>
+               
+               
+            </p>
+            <p>Furthermore, the phrase &#8220;<span class="quote"><i class="firstterm"><a name="def.ExpectedTime"></a>expected time</i></span>&#8221;
+                       O(g(n)) often appears in the manual. By this it is meant
+                       that the running time of an operation can vary from execution
+                       to execution, that the expectation value of the running
+                       time is, however, asymptotically bounded from above by the
+                       function g(n).
+               
+               
+               
+               <a class="indexterm" name="d0e4291"></a>
+               
+               
+            </p>
+            <p>Back to our sorting algorithm: A runtime of
+                     &#920;(n<sup>2</sup>) indicates that an
+                     adequately big input will always bring the system to
+                     its knees concerning its running time. So instead of investing
+                     a lot of money and effort in a reduction of the factor c, we
+                     should rather start to search for a better algorithm. Thanks to
+                     LEDA, we do not have to spend a long time searching for it: All
+                     known efficient sorting methods are built into LEDA.
+               
+            </p>
+            <p>To give an example, we read on the <a href="http://www.algorithmic-solutions.info/leda_manual/array.html" target="_top">manual page of
+                        <tt class="classname">array</tt></a> in the section
+                     &#8220;<span class="quote">Implementation</span>&#8221; that the method
+                     <tt class="methodname">sort()</tt> of arrays implements the known
+                     <i class="firstterm"><a name="def.Quicksort"></a>Quicksort algorithm</i>
+                     whose (expected) complexity is O(n·log(n)) which (seen
+                     asymptotically) is fundamentally better than
+                     &#920;(n<sup>2</sup>). This means that
+                     Quicksort defeats sorting by minimum search in the long run: If
+                     n is large enough, the expression
+                     c<sub>1</sub>·n·log(n) certainly
+                     becomes smaller than the expression
+                     c<sub>2</sub>·n<sup>2</sup>,
+                     independently from how large the two system-dependent
+                     constants c<sub>1</sub> and
+                     c<sub>2</sub> of the two methods actually are; the
+                     quotient of the two expressions converges to 0. (For small n,
+                     however, c<sub>1</sub>·n·log(n) may
+                     definitely be larger than
+                     c<sub>2</sub>·n<sup>2</sup>;
+                     indeed, Quicksort does not pay on very small arrays compared to
+                     sorting by minimum search.)
+               
+               
+                     <a class="indexterm" name="d0e4345"></a>
+               
+               
+            </p>
+            <p>Now back to the initial question: Can we sort phone
+                       books with our sorting algorithm in acceptable time? This
+                       depends, in accordance to what we said above, solely on the
+                       number of entries (that is the number of inhabitants of the town)
+                       and on the system-dependent constant c. Applied to today's
+                       machines: the phone book of Saarbrücken in any case, the one
+                       of Munich maybe in some hours, but surely not the one of
+                       Germany. With the method <tt class="methodname">sort()</tt> of
+                       the class <tt class="classname">array</tt>, however, the last
+                       problem is not a problem either.
+               
+               
+               <a class="indexterm" name="d0e4357"></a>
+               
+               
+            </p>
+         </div>
+         <div class="sect3" lang="en">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h4 class="title"><a name="d0e4365"></a>Space complexity
+                     </h4>
+                  </div>
+               </div>
+               <div></div>
+            </div><a class="indexterm" name="d0e4368"></a><a class="indexterm" name="d0e4373"></a><p>The better the time complexity of an algorithm is, the
+                        faster the algorithm will carry out his work in
+                        practice. Apart from time complexity, its <i class="firstterm"><a name="def.SpaceComplexity"></a>space complexity</i> is also
+                        important: This is essentially the number of memory cells
+                        which an algorithm needs. A good algorithm keeps this number
+                        as small as possible, too.
+               
+               
+               <a class="indexterm" name="d0e4381"></a>
+               
+            </p><a class="indexterm" name="d0e4385"></a><p>There is often a <i class="firstterm"><a name="def.TimespaceTradeoff"></a>time-space-tradeoff</i>
+                     involved in a problem, that is, it cannot be solved with few
+                     computing time <span class="emphasis"><em>and</em></span> low memory
+                     consumption. One then has to make a compromise and to exchange
+                     computing time for memory consumption or vice versa, depending
+                     on which algorithm one chooses and how one parameterizes
+                     it.
+            </p>
+         </div>
+         <div class="sect3" lang="en">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h4 class="title"><a name="sec.AmortizedAnalysis"></a>Amortized analysis
+                     </h4>
+                  </div>
+               </div>
+               <div></div>
+            </div>
+            <p>Sometimes we find the statement in the manual that an
+                     operation takes <i class="firstterm"><a name="def.AmortizedTime"></a>amortized
+                        time</i> O(f(n)).  This means that the total
+                     time for n such operations is bounded asymptotically from above
+                     by a function g(n) and that f(n)=O(g(n)/n). So the amortized
+                     time is (a bound for) the <span class="emphasis"><em>average time of an operation
+                           in the worst case</em></span>.
+               
+               
+               <a class="indexterm" name="d0e4414"></a>
+               
+               <a class="indexterm" name="d0e4420"></a>
+               
+            </p>
+            <p>The special case of an amortized time of O(1) signifies
+                     that a sequence of n such operations takes only time O(n). One
+                     then refers to this as <i class="firstterm"><a name="def.ConstantAmortizedTime"></a>constant amortized
+                        time</i>.
+               
+               
+            </p>
+            <p>Such statements are often the result of an <i class="firstterm"><a name="def.AmortizedAnalysis"></a>amortized analysis</i>: Not
+                     each of the n operations takes equally much time; some of the
+                     operations are running time intensive and do a lot of
+                     &#8220;<span class="quote">pre-work</span>&#8221; (or also &#8220;<span class="quote">post-work</span>&#8221;), what,
+                     however, pays off by the fact that, as a result of
+                     the pre-work done, the remaining operations can
+                     be carried out so fast that a total time of O(g(n)) is not
+                     exceeded. So the investment in the pre-work or
+                     after-work <i class="firstterm"><a name="def.Amortizes"></a>amortizes</i> itself.
+            </p>
+         </div>
+         <div class="simplesect" lang="en">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h4 class="title"><a name="d0e4443"></a>Exercises
+                     </h4>
+                  </div>
+               </div>
+               <div></div>
+            </div>
+            <div class="qandaset">
+               <table summary="Q and A Set" border="0">
+                  <colgroup><col align="left" width="1%">
+                  </colgroup><tbody>
+                     <tr class="question">
+                        <td align="left" valign="top"><a name="exe.DeterminingTheConstant"></a><a name="d0e4449"></a><b>Exercise&nbsp;8.</b></td>
+                        <td align="left" valign="top">
+                           <p>Create an array of 10,000 integer numbers. Sort it
+                                        with the algorithm from <a href="http://www.leda-tutorial.org/en/official/ch02s02s01.html" title="2.2.1.&nbsp;One-dimensional arrays (class array)">Section 2.2.1</a>. Measure the running
+                                        time and determine the factor c experimentally therewith.
+                                        Based on this, make predictions how long the sorting of an
+                                        array with 100,000 (Saarbrücken) elements, 1,000,000
+                                        elements (Munich), and 10,000,000 elements (Germany) will
+                                        take. Test your prediction for an array consisting of
+                                        1,000,000 elements.
+                           </p>
+                           <p>Then replace the algorithm by LEDA's
+                                        <tt class="methodname">sort()</tt> method and measure the
+                                        running times once more.
+                           </p>
+                           <p>Hint: The function <tt class="function">used_time()</tt>,
+                                        which is described in <a href="http://www.leda-tutorial.org/en/official/ch02s11s05.html" title="2.11.5.&nbsp;Some useful functions">Section 2.11.5</a>, offers its services for
+                                        measuring running times.
+                           </p>
+                        </td>
+                     </tr>
+                     <tr class="question">
+                        <td align="left" valign="top"><a name="d0e4466"></a><a name="d0e4467"></a><b>Exercise&nbsp;9.</b></td>
+                        <td align="left" valign="top">
+                           <p>Another sorting method which also takes only time
+                                        O(n·log((n)) is <i class="firstterm"><a name="def.Mergesort"></a>Mergesort</i>. It works
+                                        recursively: One divides the array to be sorted into
+                                        two halves, sorts each of the two halves recursively, and
+                                        then merges the sorted halves to a sorted array.
+                              
+                              <a class="indexterm" name="d0e4473"></a>
+                              
+                           </p>
+                           <p>What does it mean to &#8220;<span class="quote">merge</span>&#8221;? Merging
+                                        is performed by pairwise comparing the elements of the two
+                                        subarrays already sorted.  Two index variables are used
+                                        here, which run from left to right over the subarrays to be
+                                        merged.  The respectively smaller (or larger in a descending
+                                        sorting) element is written into a temporary array. The
+                                        index variable pointing to the smaller of the two values is
+                                        advanced by one position to the right.
+                           </p>
+                           <p>Work out the details. Why does this method always take
+                                        only time O(n·log(n))? Implement this method and let
+                                        it compete with LEDA's <tt class="methodname">sort()</tt> and
+                                        sorting by minimum search. 
+                           </p>
+                        </td>
+                     </tr>
+                     <tr class="question">
+                        <td align="left" valign="top"><a name="exe.DoublingStrategy"></a><a name="d0e4488"></a><b>Exercise&nbsp;10.</b></td>
+                        <td align="left" valign="top">
+                           <p>To append arbitrarily many elements at one end of an
+                                        array, the following <i class="firstterm"><a name="def.DoubingStrategy"></a>doubling strategy</i> can
+                                        be used: Every time the array is full, its size is doubled
+                                        by means of <tt class="methodname">resize()</tt>.
+                              
+                              
+                              <a class="indexterm" name="d0e4497"></a>
+                              <a class="indexterm" name="d0e4503"></a>
+                              
+                              
+                           </p>
+                           <p>Work out why appending an element takes amortized time
+                                        O(1) with this doubling strategy and therefore takes not
+                                        considerably longer than appending an element at one end of
+                                        a <i class="glossterm">linear list</i>. (There, each and every
+                                        insert and delete takes guaranteed time O(1), at whatever
+                                        position it is performed, as we will see in <a href="http://www.leda-tutorial.org/en/official/ch02s03.html" title="2.3.&nbsp;Linear lists (class list)">Section 2.3</a>.  Work out why this does not
+                                        hold if the elements are inserted at the front or in the
+                                        middle of the array (in contrast to inserting into a
+                                        linear list).
+                           </p>
+                           <p>Therefore, appending n elements to an initially empty
+                                        array takes time O(n) with this doubling strategy. Compare
+                                        this to the time it takes if the array size grows by 1
+                                        <span class="emphasis"><em>with every single append</em></span> and all
+                                        elements have to be copied to a new location.
+                                        
+                           </p>
+                        </td>
+                     </tr>
+                     <tr class="question">
+                        <td align="left" valign="top"><a name="d0e4521"></a><a name="d0e4522"></a><b>Exercise&nbsp;11.</b></td>
+                        <td align="left" valign="top">
+                           <p>In <a href="http://www.leda-tutorial.org/en/official/ch02s07.html" title="2.7.&nbsp;Queues">Section 2.7</a> we will get to know
+                                        queues; a <i class="glossterm">queue</i> is a data structure in which elements can be
+                                        appended at one end and <span class="emphasis"><em>extracted at the other
+                                              end only</em></span>. In contrast, elements can be inserted and
+                                        extracted at <span class="emphasis"><em>both</em></span> ends of a <i class="firstterm"><a name="def.Deque"></a>deque</i> (&#8220;<span class="quote">double ended
+                                           queue</span>&#8221;, pronounced as &#8220;<span class="quote">deck</span>&#8221;), see
+                                        <a href="http://www.leda-tutorial.org/en/official/ch02s02s03.html#fig.Deque" title="Figure&nbsp;2.10.&nbsp;A deque">Figure 2.10</a>.
+                           </p><a class="indexterm" name="d0e4547"></a><div class="figure"><a name="fig.Deque"></a><p class="title"><b>Figure&nbsp;2.10.&nbsp;A deque</b></p>
+                              <div class="mediaobject" align="center"><img src="ch02s02s03_files/Deque.png" alt="A deque" align="middle"><div class="caption">
+                                    <p>A deque is a queue in which elements can be
+                                           inserted and extracted at both ends. This deque is implemented by
+                                           two arrays A and B. It contains 9 elements. The elements at the
+                                           two ends are the elements A[2] and B[5]. The figure points out at
+                                           which position the next <tt class="methodname">pop()</tt>,
+                                           <tt class="methodname">push()</tt>,
+                                           <tt class="methodname">append()</tt>, or
+                                           <tt class="methodname">pop_back()</tt>, respectively, will modify the
+                                           deque.
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                           <p>LEDA does not have a class
+                                        <tt class="classname">deque</tt>, because, among other reasons,
+                                        such a structure is only rarely needed and can be easily
+                                        simulated by a <a href="http://www.leda-tutorial.org/en/official/ch02s03s01.html#def.list">linear
+                                           list</a> or a clever
+                                        arrangement of two arrays.
+                                        
+                           </p>
+                           <p>Write a class <i class="firstterm"><a name="def.deque"></a><tt class="classname">deque</tt></i>
+                                        which implements a deque. Inserting and deleting an element
+                                        shall be possible in amortized time O(1) at both ends.
+                                        Every element shall in addition be accessible in constant
+                                        time via an index. (A <a href="http://www.leda-tutorial.org/en/official/ch02s03s01.html#def.list">linear
+                                           list</a> therefore is out of question for the
+                                        implementation; <a href="http://www.leda-tutorial.org/en/official/ch02s02s03.html#fig.Deque" title="Figure&nbsp;2.10.&nbsp;A deque">Figure 2.10</a> gives
+                                        a hint for the solution of the problem.)
+                              
+                           </p>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr align="left" width="100">
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e3927" href="#d0e3927">11</a>] </sup>We assume that all strings to
+                  be sorted are very short, as it is the case in a telephone
+                  book. Consequently, here we consider the copying of a string as an
+                  operation which can be performed with a constant number of machine
+                  instructions.
+               </p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e4081" href="#d0e4081">12</a>] </sup>Strictly speaking, the equality sign is non-sense
+                  here; actually it should be a set inclusion sign, but the equality
+                  sign has become standard.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table summary="Navigation footer" width="100%">
+            <tbody><tr>
+               <td align="left" width="40%"><a accesskey="p" href="http://www.leda-tutorial.org/en/official/ch02s02s02.html"><img src="ch02s02s03_files/prev.gif" alt="Prev"></a>&nbsp;
+               </td>
+               <td align="center" width="20%"><a accesskey="u" href="http://www.leda-tutorial.org/en/official/ch02s02.html"><img src="ch02s02s03_files/up.gif" alt="Up"></a></td>
+               <td align="right" width="40%">&nbsp;<a accesskey="n" href="http://www.leda-tutorial.org/en/official/ch02s03.html"><img src="ch02s02s03_files/next.gif" alt="Next"></a></td>
+            </tr>
+            <tr>
+               <td align="left" valign="top" width="40%">2.2.2.&nbsp;Two-dimensional arrays (class array2)&nbsp;</td>
+               <td align="center" width="20%"><a accesskey="h" href="http://www.leda-tutorial.org/en/official/index.html"><img src="ch02s02s03_files/home.gif" alt="Home"></a></td>
+               <td align="right" valign="top" width="40%">&nbsp;2.3.&nbsp;Linear lists (class list)</td>
+            </tr>
+         </tbody></table>
+      </div>
+   
+</body></html>

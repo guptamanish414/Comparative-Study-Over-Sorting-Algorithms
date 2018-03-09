@@ -1,0 +1,52 @@
+Jump to: navigation, search
+Odd–even sort Example of odd-even transposition sort sorting a list of random numbers.
+Example of odd-even transposition sort sorting a list of random numbers.
+Class 	Sorting algorithm
+Data structure 	Array
+Worst case performance 	O(n^2)
+
+In computing, an odd–even sort or odd–even transposition sort (also known as brick sort[1]) is a relatively simple sorting algorithm, developed originally for use on parallel processors with local interconnections. It is a comparison sort related to bubble sort, with which it shares many characteristics. It functions by comparing all (odd, even)-indexed pairs of adjacent elements in the list and, if a pair is in the wrong order (the first is larger than the second) the elements are switched. The next step repeats this for (even, odd)-indexed pairs (of adjacent elements). Then it alternates between (odd, even) and (even, odd) steps until the list is sorted.
+Contents
+ [hide] 
+
+    * 1 Sorting on processor arrays
+    * 2 Batcher's odd–even mergesort
+    * 3 Algorithm
+    * 4 References
+
+[edit] Sorting on processor arrays
+
+On parallel processors, with one value per processor and only local left–right neighbor connections, the processors all concurrently do a compare–exchange operation with their neighbors, alternating between odd–even and even–odd pairings. This algorithm was originally presented, and shown to be efficient on such processors, by Habermann in 1972.[2]
+
+The algorithm extends efficiently to the case of multiple items per processor. In the Baudet–Stevenson odd–even merge-splitting algorithm, each processor sorts its own sublist at each step, using any efficient sort algorithm, and then performs a merge splitting, or transposition–merge, operation with its neighbor, with neighbor pairing alternating between odd–even and even–odd on each step.[3]
+[edit] Batcher's odd–even mergesort
+
+A related but more efficient sort algorithm is the Batcher odd–even mergesort, using compare–exchange operations and perfect-shuffle operations.[4] Batcher's method is efficient on parallel processors with long-range connections.[5]
+[edit] Algorithm
+
+The single-processor algorithm, like bubblesort, is simple but not very efficient. Here a zero-based index is assumed:
+
+/* Assumes a is an array of values to be sorted. */
+var sorted = false;
+while(!sorted)
+{
+    sorted=true;
+    for(var i = 1; i < list.length-1; i += 2)
+    {
+        if(a[i] > a[i+1])
+        {
+            swap(a, i, i+1);
+            sorted = false;
+        }
+    }
+ 
+    for(var i = 0; i < list.length-1; i += 2)
+    {
+        if(a[i] > a[i+1])
+        {
+            swap(a, i, i+1);
+            sorted = false;
+        }
+    }
+}
+

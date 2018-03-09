@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html dir="ltr" class="client-js" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Quicksort - Algorithmist</title>
+<meta charset="UTF-8">
+<meta name="generator" content="MediaWiki 1.18.1">
+<link rel="alternate" type="application/x-wiki" title="Edit" href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit">
+<link rel="edit" title="Edit" href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit">
+<link rel="shortcut icon" href="http://www.algorithmist.com/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://www.algorithmist.com/opensearch_desc.php" title="Algorithmist (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://www.algorithmist.com/api.php?action=rsd">
+<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="Algorithmist Atom feed" href="http://www.algorithmist.com/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="Quicksort%20-%20Algorithmist_files/load.css">
+<style type="text/css" media="all">.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:4250852ed2349a0d4d0fc6509a3e7d4c */
+</style><style type="text/css" media="all">.js-messagebox{margin:1em 5%;padding:0.5em 2.5%;border:1px solid #ccc;background-color:#fcfcfc;font-size:0.8em}.js-messagebox .js-messagebox-group{margin:1px;padding:0.5em 2.5%;border-bottom:1px solid #ddd}.js-messagebox .js-messagebox-group:last-child{border-bottom:thin none transparent}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:8b08bdc91c52a9ffba396dccfb5b473c */
+</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wikidb:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="Quicksort%20-%20Algorithmist_files/load_002.js"></script><script src="Quicksort%20-%20Algorithmist_files/load.js"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Quicksort", "wgTitle": "Quicksort", "wgCurRevisionId": 13023, "wgArticleId": 870, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Sorting", "Divide and Conquer"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": [], "wgSearchNamespaces": [0]});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script><script type="text/javascript" src="Quicksort%20-%20Algorithmist_files/load_004.js"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Quicksort action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div class="js-messagebox" id="mw-js-message" style="display:none;"></div>
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Quicksort</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From Algorithmist</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="#mw-head">navigation</a>,
+					<a href="#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div dir="ltr" class="mw-content-ltr" lang="en"><table class="toccolours" style="float: right; clear: right; margin: 0 0 1em 1em; width:20%; text-align:center; background:#E6F5FF;" cellspacing="0">
+<tbody><tr>
+<td colspan="2"><font size="4"><b><a href="http://www.algorithmist.com/index.php/Sorting" title="Sorting">Sorting</a></b></font>
+</td></tr>
+<tr>
+<td colspan="2" style="background:#CCE6FF;"><b>Algorithms</b>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Bubble_sort" title="Bubble sort">Bubble sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Insertion_sort" title="Insertion sort">Insertion sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Selection_sort" title="Selection sort">Selection sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><strong class="selflink">Quicksort</strong>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Merge_sort" title="Merge sort">Merge sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Heap_sort" title="Heap sort">Heap sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Introsort" title="Introsort">Introsort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Counting_sort" title="Counting sort">Counting sort</a>
+</td></tr>
+<tr>
+<td colspan="2" style="background:#CCE6FF;"><b>Problems</b>
+</td></tr>
+<tr>
+<td colspan="2" style="font-size: 90%;"><a href="http://www.algorithmist.com/index.php/Category:Sorting" title="Category:Sorting">Problems solvable using sorting</a>
+</td></tr>
+</tbody></table>
+<p><b>Quick sort</b> is an efficient <a href="http://www.algorithmist.com/index.php/Sorting" title="Sorting">sorting</a> algorithm invented by C.A.R. Hoare. Its average-case running time is <span class="texhtml" dir="ltr"><i>O</i>(<i>n</i>log<i>n</i>)</span>.
+ Unfortunately, Quicksort's performance degrades as the input list 
+becomes more ordered. The worst-case input, a sorted list, causes it to 
+run in <span class="texhtml" dir="ltr"><i>O</i>(<i>n</i><sup>2</sup>)</span> time. An improvement upon this algorithm that detects this prevalent corner case and guarantees <span class="texhtml" dir="ltr"><i>O</i>(<i>n</i>log<i>n</i>)</span> time is <a href="http://www.algorithmist.com/index.php/Introsort" title="Introsort">Introsort</a>.
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Algorithm"><span class="tocnumber">1</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Pseudocode"><span class="tocnumber">2</span> <span class="toctext">Pseudocode</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Alternative_definition_in_Common_Lisp"><span class="tocnumber">3</span> <span class="toctext">Alternative definition in Common Lisp</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Implementations"><span class="tocnumber">4</span> <span class="toctext">Implementations</span></a></li>
+</ul>
+</td></tr></tbody></table>
+<h2><span class="editsection">[<a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit&amp;section=1" title="Edit section: Algorithm">edit</a>]</span> <span class="mw-headline" id="Algorithm"> Algorithm </span></h2>
+<ol><li> Pick a "pivot point". Picking a good pivot point can greatly affect the running time.
+</li><li> Break the list into two lists: those elements less than the pivot element, and those elements greater than the pivot element.
+</li><li> Recursively sort each of the smaller lists.
+</li><li> Make one big list: the 'smallers' list, the pivot points, and the 'biggers' list.
+</li></ol>
+<p>Picking a random pivot point will not eliminate the <span class="texhtml" dir="ltr"><i>O</i>(<i>n</i><sup>2</sup>)</span> worst-case time, but it <i>will</i>
+ usually transform the worst case into a less frequently occuring 
+permutation. In practice, the sorted list usually comes up more often 
+than any other permutation, so this improvement is often used.
+</p>
+<h2><span class="editsection">[<a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit&amp;section=2" title="Edit section: Pseudocode">edit</a>]</span> <span class="mw-headline" id="Pseudocode"> Pseudocode </span></h2>
+<pre>Quicksort(A as array, low as int, high as int)
+    if (low &lt; high)
+        pivot_location = Partition(A,low,high)
+    Quicksort(A,low, pivot_location - 1)
+    Quicksort(A, pivot_location + 1, high)
+
+Partition(A as array, low as int, high as int)
+     pivot = A[low]
+     leftwall = low
+
+     for i = low + 1 to high
+         if (A[i] &lt; pivot) then
+             leftwall = leftwall + 1
+             swap(A[i], A[leftwall])
+
+     swap(A[low],A[leftwall])
+
+    return (leftwall)
+</pre>
+<h2><span class="editsection">[<a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit&amp;section=3" title="Edit section: Alternative definition in Common Lisp">edit</a>]</span> <span class="mw-headline" id="Alternative_definition_in_Common_Lisp"> Alternative definition in Common Lisp </span></h2>
+<pre>(defun q-sort (l &amp;optional (f #'&lt;))
+  (if (null (cdr l)) l
+    (append (q-sort (remove-if-not #'(lambda (x) (funcall f x (car l))) (cdr l)) f)
+            (list (car l))
+            (q-sort (remove-if #'(lambda (x) (funcall f x (car l))) (cdr l)) f))))
+</pre>
+<h2><span class="editsection">[<a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit&amp;section=4" title="Edit section: Implementations">edit</a>]</span> <span class="mw-headline" id="Implementations"> Implementations </span></h2>
+<ul><li> <a href="http://www.algorithmist.com/index.php/Quicksort.c" title="Quicksort.c">C</a> recursive
+</li><li> <a href="http://www.algorithmist.com/index.php/Quicksort_recursive.php" title="Quicksort recursive.php">PHP</a> recursive
+</li><li> <a href="http://www.algorithmist.com/index.php/Quicksort_non-recursive.php" title="Quicksort non-recursive.php">PHP</a> non-recursive
+</li></ul>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 73/1000000
+Post-expand include size: 877/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:870-0!1!0!!en!*!* and timestamp 20130311003255 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;oldid=13023">http://www.algorithmist.com/index.php?title=Quicksort&amp;oldid=13023</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://www.algorithmist.com/index.php/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="http://www.algorithmist.com/index.php/Category:Sorting" title="Category:Sorting">Sorting</a></li><li><a href="http://www.algorithmist.com/index.php/Category:Divide_and_Conquer" title="Category:Divide and Conquer">Divide and Conquer</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="http://www.algorithmist.com/index.php?title=Special:UserLogin&amp;returnto=Quicksort" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in / create account</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="http://www.algorithmist.com/index.php/Quicksort" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://www.algorithmist.com/index.php?title=Talk:Quicksort&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://www.algorithmist.com/index.php/Quicksort">Read</a></span></li>
+					<li id="ca-edit"><span><a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=edit" title="You can edit this page. Please use the preview button before saving [alt-shift-e]" accesskey="e">Edit</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="/index.php" id="searchform">
+		<input name="title" value="Special:Search" type="hidden">
+				<input autocomplete="off" name="search" title="Search Algorithmist [alt-shift-f]" accesskey="f" id="searchInput" type="search">		<input name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" type="submit">		<input name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" type="submit">			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(/images/3/31/Algorithmist_logo.png);" href="http://www.algorithmist.com/index.php/Main_Page" title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id="p-navigation">
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="http://www.algorithmist.com/index.php/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main Page</a></li>
+			<li id="n-Programming-Contest-Calendar"><a href="http://www.algorithmist.com/index.php/Programming_Contest_Calendar">Programming Contest Calendar</a></li>
+			<li id="n-UVa"><a href="http://www.algorithmist.com/index.php/UVa">UVa</a></li>
+			<li id="n-Sphere-Online-Judge"><a href="http://www.algorithmist.com/index.php/Sphere_Online_Judge">Sphere Online Judge</a></li>
+			<li id="n-recentchanges"><a href="http://www.algorithmist.com/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-randompage"><a href="http://www.algorithmist.com/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+			<li id="n-help"><a href="http://www.algorithmist.com/index.php/Help:Contents" title="The place to find out">Help</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- TOOLBOX -->
+<div class="portal" id="p-tb">
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="http://www.algorithmist.com/index.php/Special:WhatLinksHere/Quicksort" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://www.algorithmist.com/index.php/Special:RecentChangesLinked/Quicksort" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-specialpages"><a href="http://www.algorithmist.com/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li><a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;printable=yes" rel="alternate">Printable version</a></li>
+			<li id="t-permalink"><a href="http://www.algorithmist.com/index.php?title=Quicksort&amp;oldid=13023" title="Permanent link to this revision of the page">Permanent link</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- LANGUAGES -->
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 19 May 2012, at 10:30.</li>
+											<li id="footer-info-viewcount">This page has been accessed 52,591 times.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.2</a>.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="http://www.algorithmist.com/index.php/Algorithmist:Privacy_policy" title="Algorithmist:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="http://www.algorithmist.com/index.php/Algorithmist:About" title="Algorithmist:About">About Algorithmist</a></li>
+											<li id="footer-places-disclaimer"><a href="http://www.algorithmist.com/index.php/Algorithmist:General_disclaimer" title="Algorithmist:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-copyrightico">
+						<a href="http://www.gnu.org/copyleft/fdl.html"><img src="Quicksort%20-%20Algorithmist_files/gnu-fdl.png" alt="GNU Free Documentation License 1.2" width="88" height="31"></a>
+					</li>
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="Quicksort%20-%20Algorithmist_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="Quicksort%20-%20Algorithmist_files/load_005.js"></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax", "mediawiki.legacy.mwsuggest"]);
+}
+</script><script type="text/javascript" src="Quicksort%20-%20Algorithmist_files/load_003.js"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wikidb:resourceloader:filter:minify-js:4:19a4b18a9ac79a6b8c60b24af4668814 */
+}
+</script><!-- Served in 0.314 secs. -->
+	
+
+</body></html>

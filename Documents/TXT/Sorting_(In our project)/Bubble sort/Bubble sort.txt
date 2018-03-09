@@ -1,0 +1,29 @@
+//Bubble sort
+
+#include<stdio.h>
+void main()
+{
+	int A[20], N, Temp, i, j;
+	clrscr();
+	printf(“\n\n\t ENTER THE NUMBER OF TERMS…: “);
+	scanf(“%d”,&N);
+	printf(“\n\t ENTER THE ELEMENTS OF THE ARRAY…:”);
+	for(i=0; i<N; i++)
+	{
+		gotoxy(25, 11+i);
+		scanf(“\n\t\t%d”, &A[i]);
+	}
+	for(i=0; i<N-1; i++)
+		for(j=0; j<N-i;j++)
+			if(A[j]>A[j+1])
+			{
+				Temp = A[j];
+				A[j] = A[j+1];
+				A[j+1] = Temp;
+			}
+	printf(“\n\tTHE ASCENDING ORDER LIST IS…:\n”);
+	for(i=0; i<N; i++)
+		printf(“\n\t\t\t%d”,A[i]);
+	getch();
+}
+
